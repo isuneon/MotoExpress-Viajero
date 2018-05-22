@@ -1,0 +1,101 @@
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>ServicesApp</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <h3 class="title-form">Tipo de cuenta</h3>
+
+    <form [formGroup]="forma" (ngSubmit)="createUser()" novalidate>  
+
+        <ion-item class="select-acountType">
+            <ion-label>Tipo de cuenta</ion-label>
+            <ion-select formControlName="type_acount"  (ngModelChange)="setTypeAcount($event)">
+                <ion-option value="driver">Conductor</ion-option>
+                <ion-option value="traveler">Viajero</ion-option>
+            </ion-select>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['type_acount'].errors?.required && forma.controls['type_acount'].touched">
+            El campo es obligatorio
+        </div>
+
+        <div *ngIf="typeAcount == 'driver'">
+
+            <ion-item>
+                <ion-label floating>Marca del vehículo</ion-label>
+                <ion-input type="text" formControlName="marca"></ion-input>
+            </ion-item>
+            <div class="msg-error" *ngIf="forma.controls['marca'].errors?.required && forma.controls['marca'].touched">
+                El campo es obligatorio
+            </div>
+            <div class="msg-error" *ngIf="forma.controls['marca'].errors?.minlength && forma.controls['marca'].touched">
+                Mínimo 3 caracteres
+            </div>
+
+            <ion-item>
+                <ion-label floating>Modelo del vehículo</ion-label>
+                <ion-input type="text" formControlName="modelo"></ion-input>
+            </ion-item>
+            <div class="msg-error" *ngIf="forma.controls['modelo'].errors?.required && forma.controls['modelo'].touched">
+                El campo es obligatorio
+            </div>
+            <div class="msg-error" *ngIf="forma.controls['modelo'].errors?.minlength && forma.controls['modelo'].touched">
+                Mínimo 3 caracteres
+            </div>
+
+            <ion-item class="margin-top25">
+                <ion-label>Año del vehículo</ion-label>
+                <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" formControlName="ano" doneText="Aceptar"></ion-datetime>
+            </ion-item>
+            <div class="msg-error" *ngIf="forma.controls['ano'].errors?.required && forma.controls['ano'].touched">
+                El campo es obligatorio
+            </div>
+
+            <ion-item>
+                <ion-label floating>Color del vehículo</ion-label>
+                <ion-input type="text" formControlName="color"></ion-input>
+            </ion-item>
+            <div class="msg-error" *ngIf="forma.controls['color'].errors?.required && forma.controls['color'].touched">
+                El campo es obligatorio
+            </div>
+            <div class="msg-error" *ngIf="forma.controls['color'].errors?.minlength && forma.controls['color'].touched">
+                Mínimo 3 caracteres
+            </div>
+
+            <ion-item>
+                <ion-label floating>Placa del vehículo</ion-label>
+                <ion-input type="text" formControlName="placa"></ion-input>
+            </ion-item>
+            <div class="msg-error" *ngIf="forma.controls['placa'].errors?.required && forma.controls['placa'].touched">
+                El campo es obligatorio
+            </div>
+            <div class="msg-error" *ngIf="forma.controls['placa'].errors?.minlength && forma.controls['placa'].touched">
+                Mínimo 3 caracteres
+            </div>
+
+            <ion-item class="margin-top25">
+                <input type="file" multiple accept="image/*" formControlName="picture" (change)="uploadFile($event)">
+            </ion-item>
+            <div class="info-form">
+                <p>
+                    * Debe adjuntar una imagen de su licencia y los datos del vehículo.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="btn-form" *ngIf="typeAcount == 'driver'">
+            <button class="color-primary" ion-button block type="submit" [disabled]="!forma.valid">Registrarme</button>
+        </div>
+
+        <div class="btn-form" *ngIf="typeAcount == 'traveler'">
+            <button class="color-primary" ion-button block type="submit">Registrarme</button>
+        </div>
+
+    </form>
+
+</ion-content>

@@ -1,0 +1,112 @@
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>ServicesApp</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <h3 class="title-form">Datos del usuario</h3>
+
+    <form [formGroup]="forma" (ngSubmit)="setDataUser()" novalidate>  
+
+        <ion-item>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input type="text" formControlName="first_name"></ion-input>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['first_name'].errors?.required && forma.controls['first_name'].touched">
+            El campo es obligatorio
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['first_name'].errors?.minlength && forma.controls['first_name'].touched">
+            Mínimo 3 caracteres
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['first_name'].errors?.pattern && forma.controls['first_name'].touched">
+            Formato incorrecto. Solo letras
+        </div>
+
+        <ion-item>
+            <ion-label floating>Apellido</ion-label>
+            <ion-input type="text" formControlName="last_name"></ion-input>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['last_name'].errors?.required && forma.controls['last_name'].touched">
+            El campo es obligatorio
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['last_name'].errors?.minlength && forma.controls['last_name'].touched">
+            Mínimo 3 caracteres
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['last_name'].errors?.pattern && forma.controls['last_name'].touched">
+            Formato incorrecto. Solo letras
+        </div>
+
+        <ion-item>
+            <ion-label floating>Documento de identidad</ion-label>
+            <ion-input type="number" formControlName="identification_document"></ion-input>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['identification_document'].errors?.required && forma.controls['identification_document'].touched">
+            El campo es obligatorio
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['identification_document'].errors?.minlength && forma.controls['identification_document'].touched">
+            Mínimo 7 caracteres
+        </div>
+
+        <ion-item class="margin-top25">
+            <ion-label>Género</ion-label>
+            <ion-select formControlName="gender">
+                <ion-option value="M">Masculino</ion-option>
+                <ion-option value="F">Femenino</ion-option>
+            </ion-select>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['gender'].errors?.required && forma.controls['gender'].touched">
+            El campo es obligatorio
+        </div>
+
+        <ion-item class="margin-top25">
+            <ion-label>Fecha de nacimiento</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MMMM/YYYY" max={{now}} formControlName="birthdate" doneText="Aceptar"></ion-datetime>
+        </ion-item>
+         <div class="msg-error" *ngIf="forma.controls['birthdate'].errors?.required && forma.controls['birthdate'].touched">
+            El campo es obligatorio
+        </div>
+
+        <ion-item>
+            <ion-label floating>Correo electrónico</ion-label>
+            <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['email'].errors?.required && forma.controls['email'].touched">
+            El campo es obligatorio
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['email'].errors?.pattern && forma.controls['email'].touched">
+            Formato incorrecto
+        </div>
+
+  		<ion-item>
+    		<ion-label floating>Password</ion-label>
+    		<ion-input type="password" formControlName="password1"></ion-input>
+  		</ion-item>
+        <div class="msg-error" *ngIf="forma.controls['password1'].errors?.required && forma.controls['password1'].touched">
+            El campo es obligatorio
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['password1'].errors?.minlength && forma.controls['password1'].touched">
+            Mínimo 8 caracteres
+        </div> 
+
+        <ion-item>
+            <ion-label floating>Confirmar password</ion-label>
+            <ion-input type="password" formControlName="password2"></ion-input>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['password2'].errors?.required && forma.controls['password2'].touched">
+            El campo es obligatorio
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['password2'].errors?.noIguales && forma.controls['password2'].dirty">
+            Las contraseñas no coinciden
+        </div>
+
+        <div class="btn-form">
+            <button class="color-primary" ion-button block type="submit" [disabled]="!forma.valid">Continuar</button>
+        </div>
+
+    </form>
+
+</ion-content>

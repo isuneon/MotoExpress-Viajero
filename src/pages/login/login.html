@@ -1,0 +1,49 @@
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>Services App</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <h3 class="title-form">Inicio de sesión</h3>
+
+    <form [formGroup]="forma" (ngSubmit)="inicioSesion()" novalidate>   
+
+        <ion-item>
+    		<ion-label floating>Correo</ion-label>
+    		<ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <div class="msg-error" *ngIf="forma.controls['email'].errors?.required && forma.controls['email'].touched">
+            El campo es obligatorio
+        </div>
+        <div class="msg-error" *ngIf="forma.controls['email'].errors?.pattern && forma.controls['email'].touched">
+            Formato incorrecto
+        </div>
+
+  		<ion-item>
+    		<ion-label floating>Password</ion-label>
+    		<ion-input type="password" formControlName="password"></ion-input>
+  		</ion-item>
+        <div class="msg-error" *ngIf="forma.controls['password'].errors?.required && forma.controls['password'].touched">
+            El campo es obligatorio
+        </div>
+
+        <div class="btn-form">
+            <button class="color-primary" ion-button block type="submit" [disabled]="!forma.valid">Iniciar Sesión</button>
+        </div>
+
+    </form>
+    
+    <div class="btn-form center">
+        <button ion-button clear (click) = "inicioSesionFacebook()">Login with Facebook</button>  
+        <button ion-button clear (click) = "inicioSesionGoogle()">Login with Google</button>
+        <button ion-button clear (click) = "recuperarContrasena()">Olvide mi contraseña</button>
+        <button ion-button clear (click) = "nuevoUsuario()">Registrarme</button>
+        <!-- <button ion-button clear (click) = "signOut()">Logout</button>
+        <button ion-button clear (click) = "logout()">Logout</button> -->
+    </div>
+
+</ion-content>
