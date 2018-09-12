@@ -41,7 +41,7 @@ export class EditUserPage {
         this.getUser();
     }
 
-    getUser(){
+    /*getUser(){
         let loader = this._principalProvider.loading('Consultando usuario');
         this._usersProvider.comprobarEmail(localStorage.getItem("email")).snapshotChanges().subscribe(actions => {
             if(actions.length > 0){
@@ -58,14 +58,51 @@ export class EditUserPage {
             }
             loader.dismiss();
         });
-    }
+    }*/
 
-    updateUser(){
+    /*updateUser(){
         this._principalProvider.loadingTemp('Actualizando...');
         this._usersProvider.update(this.key, this.forma);
         localStorage.setItem("type_acount", this.forma.controls['type_acount']['value']);
+    }*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
+
+    getUser(){
+        let loader = this._principalProvider.loading('Consultando usuario');
+        this._usersProvider.comprobarEmail1(localStorage.getItem("email")).subscribe(res => {
+            if(res['status'] = "200"){
+                this.forma.controls['first_name'].setValue(res['data']['nombre']);
+                this.forma.controls['last_name'].setValue(res['data']['apellido']);
+                this.forma.controls['identification_document'].setValue(res['data']['documento_identidad']);
+                this.forma.controls['gender'].setValue(res['data']['genero']);
+                this.forma.controls['birthdate'].setValue(res['data']['fecha_nacimiento']);
+                this.forma.controls['email'].setValue(res['data']['correo']);
+                this.forma.controls['type_acount'].setValue(res['data']['type_acount']);
+            }else{
+                this._principalProvider.showAlert('Error', 'Ocurrió un error al intentar consultar la información del usuario')
+            }
+            loader.dismiss();
+        });
     }
-    
+
+
+    updateUser(){
+        this._principalProvider.loadingTemp('Actualizando...');
+        this._usersProvider.update(localStorage.getItem("id"), this.forma).subscribe(res => {
+            if(res['status'] == "200"){
+                localStorage.setItem("email", res['data']['correo']);
+                localStorage.setItem("user", res['data']['nombre']);
+                // localStorage.setItem("id", res['data']['id']);
+                localStorage.setItem("type_acount", res['data']['type_acount']);
+                localStorage.setItem("procedencia", 'correo');
+            }else{
+                this._principalProvider.showAlert('Error', 'Ocurrió un error al intentar actualizar la información del usuario')
+            }
+        });
+    }
+
+
     presentPopover(myEvent) {
         let popover = this.popoverCtrl.create(PopoverPage);
         popover.present({

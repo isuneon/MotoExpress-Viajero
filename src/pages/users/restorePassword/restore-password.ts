@@ -37,7 +37,7 @@ export class RestorePasswordPage {
 
     restorePassword(){
         let loader = this._principalProvider.loading('Enviando contraseña a su correo');
-        this._usersProvider.comprobarEmail(this.forma.controls['email']['value']).snapshotChanges().subscribe(actions => {
+        this._usersProvider.comprobarEmail1(this.forma.controls['email']['value']).subscribe(actions => {
             if(actions.length > 0){
                 if(this.forma.controls['email']['value'] == actions[0]['payload'].val()['correo']){
                     this.key = actions[0]['key']

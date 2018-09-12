@@ -1,8 +1,13 @@
 {
-  "name": "servicesApp",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+	"name": "servicesApp",
+	"app_id": "",
+	"type": "ionic-angular",
+	"integrations": {
+		"cordova": {}
+	},
+	"proxies": [{
+  		"path": "/proxy",
+  		"proxyUrl": "http://localhost:8000"
+    }
+  ]
 }

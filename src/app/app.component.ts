@@ -7,7 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { EditUserPage } from '../pages/users/editUser/edit-user';
 import { PrincipalProvider } from '../providers/principal';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -53,6 +53,7 @@ export class MyApp {
         localStorage.removeItem("email");
         localStorage.removeItem("type_acount");
         localStorage.removeItem("user");
+        localStorage.removeItem("id");
         localStorage.removeItem("procedencia");
         this.nav.setRoot(LoginPage)
     }

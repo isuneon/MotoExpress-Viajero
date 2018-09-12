@@ -31,6 +31,7 @@
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-email-composer": "^0.8.15",
     "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-plugin-googlemaps": "~2.2.9",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -58,7 +59,11 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-email-composer": {},
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-googlemaps": {
+        "API_KEY_FOR_ANDROID": "AIzaSyCvivniFLkU-dvv84R2lMdR4wOQym7HuDM",
+        "API_KEY_FOR_IOS": "AIzaSyCvivniFLkU-dvv84R2lMdR4wOQym7HuDM"
+      }
     },
     "platforms": [
       "android"

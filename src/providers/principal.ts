@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RequestOptions, Headers, RequestMethod, URLSearchParams } from '@angular/http';
 import { LoadingController, AlertController } from 'ionic-angular';
 import * as CryptoJS from 'crypto-js';
 import * as moment from 'moment';
@@ -80,5 +81,19 @@ export class PrincipalProvider {
 
     formatDate(fecha, formato){
         return moment(fecha).format(formato)
+    }
+
+    configurarCabeceraPost() {
+        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
+        let options = new RequestOptions({ method: RequestMethod.Post, headers: headers });
+        return options
+    }
+
+    serializeParams(data){
+        let params = new URLSearchParams();
+        for(let key in data){
+            params.set(key, data[key])
+        }
+        return params
     }
 }

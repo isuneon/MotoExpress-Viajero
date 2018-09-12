@@ -1,0 +1,35 @@
+<ion-header>
+	<ion-navbar>
+    	<ion-title>Detalles del viaje</ion-title>
+  	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<ion-list>
+  		<ion-item>
+    		<ion-icon name="map" item-start></ion-icon>
+    		Distancia a recorrer
+    		<ion-note item-end>{{data['distancia']}}</ion-note>
+  		</ion-item>
+  		<ion-item>
+            <ion-icon name="car" item-start></ion-icon>
+            Origen
+            <ion-note item-end>{{data['origen']}}</ion-note>
+      </ion-item>
+      <ion-item>
+    		<ion-icon name="car" item-start></ion-icon>
+    		Destino
+    		<ion-note item-end>{{data['destino']}}</ion-note>
+  		</ion-item>
+  		<ion-item>
+        <ion-icon name="alarm" item-start></ion-icon>
+          Tiempo estimado de llegada
+          <ion-note item-end>{{data['duracion']}}</ion-note>
+      </ion-item>
+      <ion-item>
+    		<ion-icon name="card" item-start></ion-icon>
+      		Precio
+      		<ion-note item-end>{{data['precio']}}</ion-note>
+  		</ion-item>
+  		<button class="color-primary" ion-button block (click) = "showPrompt()">Tomar viaje</button>
+	</ion-list>
+</ion-content>

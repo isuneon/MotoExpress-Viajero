@@ -35,7 +35,7 @@ export class LoginPage {
     
     }
 
-    inicioSesion(){
+    /*inicioSesion(){
         let loader = this._principalProvider.loading('Iniciando sesión');
         this._usersProvider.comprobarEmail(this.forma.controls['email'].value).snapshotChanges().subscribe(actions => {
             if(actions.length > 0){
@@ -59,17 +59,9 @@ export class LoginPage {
             }
             loader.dismiss();
         });
-    }
+    }*/
 
-    recuperarContrasena(){
-        this.navCtrl.push(RestorePasswordPage)
-    }
-
-    nuevoUsuario(){
-        this.navCtrl.push(CreateUserPage)
-    }
-
-    inicioSesionFacebook() {
+   /* inicioSesionFacebook() {
         let loader = this._principalProvider.loading('Iniciando sesión con Facebook');
         this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(res => {
             if(res['user']['email']){
@@ -77,9 +69,9 @@ export class LoginPage {
                 this.validarCuentaUsuario(res, loader, proveedor);
             }
         });
-    }
+    }*/
 
-    inicioSesionGoogle() {
+    /*inicioSesionGoogle() {
         let loader = this._principalProvider.loading('Iniciando sesión con Google');
         this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(res => {
             if(res['user']['email']){
@@ -87,9 +79,9 @@ export class LoginPage {
                 this.validarCuentaUsuario(res, loader, proveedor);
             }
         });
-    } 
-
-    validarCuentaUsuario(info, loader, redSocial){
+    } */
+    
+    /*validarCuentaUsuario(info, loader, redSocial){
         this._usersProvider.comprobarEmail(info['user']['email']).snapshotChanges().subscribe(actions => {
             if(actions.length > 0){
                 let data = actions[0]['payload'].val()
@@ -103,12 +95,92 @@ export class LoginPage {
             }
             loader.dismiss();
         });
+    }*/
+   
 
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+
+    inicioSesion(){
+        this.forma.controls['password'].setValue(this._principalProvider.encryptByDES(this.forma.controls['password']['value']));
+        let loader = this._principalProvider.loading('Iniciando sesión');
+        this._usersProvider.iniciarSesion(this.forma.controls).subscribe(res => {
+            if(res['status'] == "200"){
+                let data = res['data']
+                if(data['type_acount'] == 'driver' && data['autorizado'] == "false"){
+                   this._principalProvider.showAlert('Error', 'Su cuenta aun no esta autorizada para utilizar la app');
+                }else{
+                    localStorage.setItem("email", data['correo']);
+                    localStorage.setItem("type_acount", data['type_acount']);
+                    localStorage.setItem("user", data['nombre']);
+                    localStorage.setItem("id", data['id']);
+                    localStorage.setItem("procedencia", 'correo');
+                    this.navCtrl.setRoot(HomePage)
+                }
+            }else{
+                this._principalProvider.showAlert('Error', 'Usuario o contraseña incorrectos.');
+            }
+            loader.dismiss();
+        },
+        error => {
+            console.log(error)
+        });
     }
-    
+
+
+    nuevoUsuario(){
+        this.navCtrl.push(CreateUserPage)
+    }
+
+
+    recuperarContrasena(){
+        this.navCtrl.push(RestorePasswordPage)
+    }
+
+
+    inicioSesionFacebook() {
+        let loader = this._principalProvider.loading('Iniciando sesión con Facebook');
+        this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(res => {
+            if(res['user']['email']){
+                let proveedor = res['credential']['providerId'].split(".")[0];
+                this.validarCuentaUsuario(res, loader, proveedor);
+            }
+        });
+    }
+
+
+    inicioSesionGoogle() {
+        let loader = this._principalProvider.loading('Iniciando sesión con Google');
+        this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(res => {
+            if(res['user']['email']){
+                let proveedor = res['credential']['providerId'].split(".")[0];
+                this.validarCuentaUsuario(res, loader, proveedor);
+            }
+        });
+    } 
+
+
+    validarCuentaUsuario(info, loader, redSocial){
+        this._usersProvider.comprobarEmail1(info['user']['email']).subscribe(res => {
+            if(res['status'] == "200"){
+                localStorage.setItem("email", res['data']['correo']);
+                localStorage.setItem("type_acount", res['data']['type_acount']);
+                localStorage.setItem("user", res['data']['nombre']);
+                localStorage.setItem("id", res['data']['id']);
+                localStorage.setItem("procedencia", redSocial);
+                this.navCtrl.setRoot(HomePage)
+            }else{
+                this.navCtrl.push(CreateUserPage, {data: info});
+            }
+
+            
+            loader.dismiss();
+        });
+    }
+
     // signOut() {
     //     this.afAuth.auth.signOut();
     // }
+
 
     // logout() {
     //     this.afAuth.auth.signOut();

@@ -1,0 +1,16 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Conductores</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<ion-card *ngFor="let item of data">
+		<ion-card-header>
+			{{item['nombre']}}
+		</ion-card-header>
+		<ion-card-content>
+			{{item['distanciaKM']}}
+		</ion-card-content>
+		<button ion-button class="color-black">Aceptar</button>
+	</ion-card>
+</ion-content>

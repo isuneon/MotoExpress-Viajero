@@ -48,7 +48,7 @@ export class DataUserPage {
     }
 
 
-    createUser(){
+    /*createUser(){
         console.log(this.forma.controls['picture']['value'])
 
         let nuevoUsuario = false;
@@ -68,10 +68,43 @@ export class DataUserPage {
             }
         });
         loader.dismiss();
+    }*/
+
+
+    uploadFile(event){
+        let file = event.target.files[0];
+        let filePath = 'images/' + file['name'];
+        let task = this.storage.upload(filePath, file);
+        console.log(task)
+    }
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
+
+    createUser(){
+        let pwdEncrypt = this._principalProvider.encryptByDES(this.data.controls['password1']['value'])
+        let loader = this._principalProvider.loading('Registrando usuario');
+        this._usersProvider.comprobarEmail1(this.data.controls['email'].value).subscribe(res => {
+            if(res['status'] == "404"){
+                let dataFormateada = this.formatData(this.forma, this.data, pwdEncrypt);
+                this._usersProvider.usuarioNuevo(dataFormateada).subscribe(response => {
+                    if(response['status'] == "200"){
+                        this._principalProvider.showAlert('Éxito', 'Usuario registrado exitosamente');
+                        this.nav.setRoot(LoginPage)
+                    }else{
+                        this._principalProvider.showAlert('Error', 'Ocurrió un error al intentar registrar el usuario');
+                    }
+                });
+            }else{
+                this._principalProvider.showAlert('Error', 'Este correo ya se encuentra en uso. Intente con otro correo');
+            }
+            loader.dismiss();
+        },
+        error => {
+            console.log(error)
+        });
     }
 
     formatData(forma, info, pwd){
-        
         this.dataUser = {
             nombre: info['controls']['first_name']['value'],
             apellido: info['controls']['last_name']['value'],
@@ -95,10 +128,4 @@ export class DataUserPage {
         return this.dataUser;
     } 
 
-    uploadFile(event){
-        let file = event.target.files[0];
-        let filePath = 'images/' + file['name'];
-        let task = this.storage.upload(filePath, file);
-        console.log(task)
-    }
 }

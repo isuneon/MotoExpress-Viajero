@@ -31,16 +31,7 @@ export class ChangePasswordPage {
         this.forma.controls['password2'].setValidators([Validators.required, this.noIgual.bind(this.forma)])
     }
 
-    noIgual(control: FormBuilder): any {
-        if(control['value'] !== this['controls']['password1'].value){
-            return {
-                noIguales:true
-            }
-        }
-        return null;
-    }
-
-    updatePassword(){
+    /*updatePassword(){
         let loader = this._principalProvider.loading('Actualizando contraseña');
         this._usersProvider.comprobarEmail(localStorage.getItem("email")).snapshotChanges().subscribe(actions => {
             if(actions.length > 0){
@@ -59,6 +50,35 @@ export class ChangePasswordPage {
             }
             loader.dismiss();
         });
+    }*/
+
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+
+    updatePassword(){
+        let loader = this._principalProvider.loading('Actualizando contraseña');
+        let pwdEncryptOld = this._principalProvider.encryptByDES(this.forma.controls['password']['value'])
+        let pwdEncryptNew = this._principalProvider.encryptByDES(this.forma.controls['password1']['value'])
+        this._usersProvider.changePassword(localStorage.getItem("id"), pwdEncryptOld, pwdEncryptNew).subscribe(res => {
+            if(res['status'] == "200"){
+                this._principalProvider.showAlert('Éxito', 'Contraseña actualizada exitosamente');
+            }else{
+                this._principalProvider.showAlert('Error', res['error'])
+            }
+            loader.dismiss();
+        },
+        error => {
+            console.log(error)
+        });
+    }
+
+
+    noIgual(control: FormBuilder): any {
+        if(control['value'] !== this['controls']['password1'].value){
+            return {
+                noIguales:true
+            }
+        }
+        return null;
     }
     
 }
