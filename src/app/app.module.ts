@@ -24,6 +24,11 @@ import { RestorePasswordPage } from '../pages/users/restorePassword/restore-pass
 import { PopoverPage } from '../pages/users/popover/popover';
 import { TravelDetailsPage } from '../pages/travels/travelDetails/travel-details';
 import { DriversDetailsPage } from '../pages/travels/driversDetails/drivers-details';
+import { TravelInfoPage } from '../pages/travels/travelInfo/travel-info';
+import { PopoverTravelPage } from '../pages/travels/popoverTravel/popover-travel';
+import { TravelQualificationPage } from '../pages/travels/travelQualification/travel-qualification';
+import { TravelNotificationPage } from '../pages/travels/travelNotification/travel-notification';
+import { TravelerDetailsPage } from '../pages/travels/travelerDetails/traveler-details';
 
 
 /* Providers */
@@ -54,8 +59,13 @@ export const firebaseConfig = {
         ChangePasswordPage,
         RestorePasswordPage,
         PopoverPage,
+        PopoverTravelPage,
         TravelDetailsPage,
-        DriversDetailsPage
+        TravelInfoPage,
+        DriversDetailsPage,
+        TravelQualificationPage,
+        TravelNotificationPage,
+        TravelerDetailsPage
     ],
     imports: [
         BrowserModule,
@@ -80,8 +90,13 @@ export const firebaseConfig = {
         ChangePasswordPage,
         RestorePasswordPage,
         PopoverPage,
+        PopoverTravelPage,
         TravelDetailsPage,
-        DriversDetailsPage
+        TravelInfoPage,
+        DriversDetailsPage,
+        TravelQualificationPage,
+        TravelNotificationPage,
+        TravelerDetailsPage
     ],
     providers: [
         StatusBar,

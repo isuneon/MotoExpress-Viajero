@@ -13,6 +13,7 @@
 	<ion-content>
 		<ion-list>
 	  		<button menuClose ion-item *ngIf = "_principalProvider.getRol() == 'driver' || _principalProvider.getRol() == 'admin'">Conductor</button>
+	  		<button menuClose ion-item (click) = "notificacionesViajes()" *ngIf = "_principalProvider.getRol() == 'driver' || _principalProvider.getRol() == 'admin'">Notificaciones</button>
 	  		<button menuClose ion-item *ngIf = "_principalProvider.getRol() == 'traveler' || _principalProvider.getRol() == 'admin'">Viajero</button>
 	  		<button menuClose ion-item *ngIf = "_principalProvider.getRol() == 'admin'">Administrador</button>
 

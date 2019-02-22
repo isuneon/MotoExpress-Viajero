@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestOptions, Headers, RequestMethod, URLSearchParams } from '@angular/http';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, ToastController  } from 'ionic-angular';
 import * as CryptoJS from 'crypto-js';
 import * as moment from 'moment';
 
@@ -11,7 +11,8 @@ export class PrincipalProvider {
     key = 'isuneon123ServiceApp456';
 
 	constructor(public loadingCtrl: LoadingController,
-				public alertCtrl: AlertController,) {}
+				public alertCtrl: AlertController,
+                public toastCtrl: ToastController) {}
 
 	loading(texto) {
         let loader = this.loadingCtrl.create({
@@ -37,6 +38,15 @@ export class PrincipalProvider {
             duration: 1500
         });
         loader.present();
+    }
+
+    presentToast(texto, posicion, tiempo = 3000){
+        const toast = this.toastCtrl.create({
+            message: texto,
+            duration: tiempo,
+            position: posicion
+        });
+        toast.present();
     }
 
     encryptByDES(message) {

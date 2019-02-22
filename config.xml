@@ -85,8 +85,8 @@
     <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-plugin-googlemaps" spec="~2.2.9">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCvivniFLkU-dvv84R2lMdR4wOQym7HuDM" />
-        <variable name="API_KEY_FOR_IOS" value="AIzaSyCvivniFLkU-dvv84R2lMdR4wOQym7HuDM" />
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyA5MAt4D7mQpAFYsnXvfF-U9oFkLkiCmuQ" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyA5MAt4D7mQpAFYsnXvfF-U9oFkLkiCmuQ" />
     </plugin>
     <engine name="android" spec="7.0.0" />
 </widget>

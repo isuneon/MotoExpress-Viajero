@@ -3,7 +3,10 @@
 		<button ion-button menuToggle>
 	  		<ion-icon name="menu"></ion-icon>
 		</button>
-		<ion-title>Service App</ion-title>
+		<div class="center">
+	        <!-- <img style = "height: 40px; width: 290px;" src="assets/imgs/logoapp.svg" /> -->
+	     	<ion-title>Services App</ion-title>
+	    </div>
 	</ion-navbar>
 </ion-header>
 
@@ -17,3 +20,8 @@
   	</ion-scroll> -->
 </ion-content>
 <ion-input class="controls" type="text" placeholder="¿A dónde vas?" id="googlePlaces" required></ion-input>
+<ion-footer>
+    <ion-toolbar text-center text-uppercase>
+        <p>{{anio}} © Isuneon S.A.</p>
+    </ion-toolbar>
+</ion-footer>

@@ -1,22 +1,25 @@
 <ion-header>
-
 	<ion-navbar>
-		<ion-title>ServicesApp</ion-title>
-        <div class="more-options">
-            <button class="btn-more-options" ion-button icon-only (click)="presentPopover($event)">
-                <ion-icon name="more"></ion-icon>
-            </button>
-        </div>
+        <ion-grid>
+            <ion-row>
+                <!-- <div class="center">
+                    <img style = "height: 40px; width: 290px;" src="assets/imgs/logoapp.svg" />
+                </div> -->
+                <ion-col col-10 padding-vertical>
+                    <ion-title>Services App</ion-title>
+                </ion-col>
+                <ion-col text-right>
+                    <button class="btn-more-options" ion-button icon-only (click)="presentPopover($event)">
+                        <ion-icon name="more"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-navbar>
-
 </ion-header>
-
 <ion-content padding>
-
     <h3 class="title-form">Editar Usuario</h3>
-
     <form [formGroup]="forma" (ngSubmit)="updateUser()" novalidate>  
-
         <ion-item>
             <ion-label floating>Nombre</ion-label>
             <ion-input type="text" formControlName="first_name"></ion-input>
@@ -30,7 +33,6 @@
         <div class="msg-error" *ngIf="forma.controls['first_name'].errors?.pattern && forma.controls['first_name'].touched">
             Formato incorrecto. Solo letras
         </div>
-
         <ion-item>
             <ion-label floating>Apellido</ion-label>
             <ion-input type="text" formControlName="last_name"></ion-input>
@@ -44,7 +46,6 @@
         <div class="msg-error" *ngIf="forma.controls['last_name'].errors?.pattern && forma.controls['last_name'].touched">
             Formato incorrecto. Solo letras
         </div>
-
         <ion-item>
             <ion-label floating>Documento de identidad</ion-label>
             <ion-input type="number" formControlName="identification_document" readonly></ion-input>
@@ -55,7 +56,6 @@
         <div class="msg-error" *ngIf="forma.controls['identification_document'].errors?.minlength && forma.controls['identification_document'].touched">
             Mínimo 7 caracteres
         </div>
-
         <ion-item class="margin-top25">
             <ion-label>Género</ion-label>
             <ion-select formControlName="gender">
@@ -66,7 +66,6 @@
         <div class="msg-error" *ngIf="forma.controls['gender'].errors?.required && forma.controls['gender'].touched">
             El campo es obligatorio
         </div>
-
         <ion-item class="margin-top25">
             <ion-label>Fecha de nacimiento</ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MMMM/YYYY" max={{now}} formControlName="birthdate" doneText="Aceptar"></ion-datetime>
@@ -74,7 +73,6 @@
          <div class="msg-error" *ngIf="forma.controls['birthdate'].errors?.required && forma.controls['birthdate'].touched">
             El campo es obligatorio
         </div>
-
         <ion-item>
             <ion-label floating>Correo electrónico</ion-label>
             <ion-input type="text" formControlName="email" readonly></ion-input>
@@ -85,7 +83,6 @@
         <div class="msg-error" *ngIf="forma.controls['email'].errors?.pattern && forma.controls['email'].touched">
             Formato incorrecto
         </div>
-
         <ion-item class="margin-top25">
             <ion-label>Tipo de cuenta</ion-label>
             <ion-select formControlName="type_acount" readonly>
@@ -96,11 +93,13 @@
         <div class="msg-error" *ngIf="forma.controls['type_acount'].errors?.required && forma.controls['type_acount'].touched">
             El campo es obligatorio
         </div>
-
-        <div class="btn-form">
+        <div class="btn-form" padding-top>
             <button class="color-primary" ion-button block type="submit" [disabled]="!forma.valid">Guardar</button>
         </div>
-
     </form>
-
 </ion-content>
+<ion-footer>
+    <ion-toolbar text-center text-uppercase>
+        <p>{{anio}} © Isuneon S.A.</p>
+    </ion-toolbar>
+</ion-footer>

@@ -4,8 +4,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { UsersProvider } from '../../../providers/users/users';
 import { PrincipalProvider } from '../../../providers/principal';
 import { EmailComposer } from '@ionic-native/email-composer';
-
 import {AngularFireAuth} from 'angularfire2/auth';
+import * as moment from 'moment';
 
 
 @Component({
@@ -17,7 +17,8 @@ export class RestorePasswordPage {
     forma: FormGroup;
     codigo: number;
     key: string = "";
-   
+    anio: string;
+
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams,
                 public loadingCtrl: LoadingController,
@@ -28,6 +29,8 @@ export class RestorePasswordPage {
                 public emailComposer: EmailComposer,
                 private afAuth: AngularFireAuth) {
 
+        // this.anio = new Date().getFullYear();
+        this.anio = moment().format('YYYY')   
         this.forma = this.formBuilder.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])]
         });

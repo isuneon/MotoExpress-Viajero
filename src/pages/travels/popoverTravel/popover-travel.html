@@ -1,0 +1,18 @@
+<ion-list radio-group [(ngModel)]="motivo" class="popover-page">
+	<ion-row>
+        <ion-col>
+            <ion-item>
+                <div>Motivo para cancelar el viaje</div>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-item *ngFor="let item of mensajes">
+        <ion-label>{{item['descripcion']}}</ion-label>
+        <ion-radio value="{{item['descripcion']}}"></ion-radio>
+    </ion-item>
+    <ion-row>
+        <ion-col>
+	       <button ion-button block class="color-primary" (click)="confirmarCancelacion()">Cancelar viaje</button>
+        </ion-col>
+    </ion-row>
+</ion-list>

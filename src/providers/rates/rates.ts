@@ -20,4 +20,11 @@ export class RatesProvider {
         })
     }
 
+
+    obtenerKm(){
+        return this.http.get(`${this._preferStorage.dict.servicioTarifas.urlServicio}/km`).map( res => {
+            return res.json();
+        })
+    }
+
 }

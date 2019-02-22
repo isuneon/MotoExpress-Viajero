@@ -1,0 +1,18 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Información del viajero</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-item-group>
+        <ion-item-divider color="light">Información del viajero</ion-item-divider>
+        <ion-item><ion-icon name="person" item-start></ion-icon> Nombre: {{dataViajero['nombre']}}</ion-item>
+        <ion-item><ion-icon name="call" item-start></ion-icon> Teléfono: {{dataViajero['telefono']}}</ion-item>
+        <ion-item><ion-icon name="star" item-start></ion-icon> Calificación promedio: {{dataViajero['promedio'] | number : '1.2-2'}}</ion-item>
+        <ion-item><ion-icon name="map" item-start></ion-icon> Distancia al viajero: {{dataViajero['distanciaKM']}}</ion-item>
+<!--         <ion-item><ion-icon name="time" item-start></ion-icon> Tiempo estimado de llegada al viajero: {{displayTime}}</ion-item> -->
+    </ion-item-group>
+    <div padding-top>
+        <button class="color-primary" ion-button block (click) = "forzarInicioViaje()">Iniciar de viaje</button>
+    </div>
+</ion-content>

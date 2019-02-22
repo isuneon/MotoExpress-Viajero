@@ -5,8 +5,8 @@ import { UsersProvider } from '../../../providers/users/users';
 import { PrincipalProvider } from '../../../providers/principal';
 import { LoginPage } from '../../login/login';
 import { User } from '../../../interface/user.interface';
-
 import { AngularFireStorage } from 'angularfire2/storage';
+import * as moment from 'moment';
 
 @Component({
     selector: 'page-data-user',
@@ -19,6 +19,7 @@ export class DataUserPage {
     typeAcount: string = "";
     data: any;
     prueba: any;
+    anio: string;
     
     constructor(public navCtrl: NavController, 
                 public nav: Nav,
@@ -30,6 +31,8 @@ export class DataUserPage {
                 public _principalProvider: PrincipalProvider,
                 public storage: AngularFireStorage) {
 
+        // this.anio = new Date().getFullYear();
+        this.anio = moment().format('YYYY')
         this.data = navParams.get("data");
         this.forma = this.formBuilder.group({
             type_acount: ['', Validators.required],

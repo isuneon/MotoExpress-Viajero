@@ -16,6 +16,7 @@ export class CreateUserPage {
     forma : FormGroup;
     now:string = "";
     data:any;
+    anio: string;
 
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams,
@@ -23,6 +24,8 @@ export class CreateUserPage {
                 public _usersProvider: UsersProvider,
                 public _principalProvider: PrincipalProvider) {
 
+        // this.anio = new Date().getFullYear();
+        this.anio = moment().format('YYYY')
         this.data = navParams.get("data");
 
         this.forma = this.formBuilder.group({

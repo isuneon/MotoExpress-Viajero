@@ -1,0 +1,22 @@
+<ion-header>
+	<ion-navbar>
+    	<ion-title>Viajes pendientes de aprobación</ion-title>
+  	</ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-card *ngFor="let item of viajeros">
+        <ion-card-content>
+            <h1>Calificación del viajero: {{item['promedio'] | number : '1.2-2'}} <ion-icon name="star"></ion-icon></h1>
+        </ion-card-content>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <button ion-button float-left class="color-primary" (click) = "rechazarViaje(item)">Cancelar viaje</button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button float-right class="color-primary" (click) = "aceptarViaje(item)">Tomar viaje</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+</ion-content>

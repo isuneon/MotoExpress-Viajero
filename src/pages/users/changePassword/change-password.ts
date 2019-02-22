@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { UsersProvider } from '../../../providers/users/users';
 import { PrincipalProvider } from '../../../providers/principal';
+import * as moment from 'moment';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class ChangePasswordPage {
 
     forma : FormGroup;
     key:string = "";
+    anio: string;
    
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams,
@@ -22,6 +24,8 @@ export class ChangePasswordPage {
                 public _usersProvider: UsersProvider,
                 public _principalProvider: PrincipalProvider) {
 
+        // this.anio = new Date().getFullYear();
+        this.anio = moment().format('YYYY')
         this.forma = this.formBuilder.group({
             password: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
             password1: ['', Validators.compose([Validators.required, Validators.minLength(8)])],

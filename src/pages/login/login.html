@@ -1,17 +1,14 @@
-<ion-header>
-
+<!-- <ion-header>
 	<ion-navbar>
 		<ion-title>Services App</ion-title>
 	</ion-navbar>
-
-</ion-header>
-
+</ion-header>-->
 <ion-content padding>
-
-    <h3 class="title-form">Inicio de sesión</h3>
-
+    <!-- <h3 class="title-form">Inicio de sesión</h3> -->
+    <div class="center">
+        <img src="assets/imgs/logoapp.svg" />
+    </div>
     <form [formGroup]="forma" (ngSubmit)="inicioSesion()" novalidate>   
-
         <ion-item>
     		<ion-label floating>Correo</ion-label>
     		<ion-input type="text" formControlName="email"></ion-input>
@@ -22,7 +19,6 @@
         <div class="msg-error" *ngIf="forma.controls['email'].errors?.pattern && forma.controls['email'].touched">
             Formato incorrecto
         </div>
-
   		<ion-item>
     		<ion-label floating>Password</ion-label>
     		<ion-input type="password" formControlName="password"></ion-input>
@@ -30,20 +26,47 @@
         <div class="msg-error" *ngIf="forma.controls['password'].errors?.required && forma.controls['password'].touched">
             El campo es obligatorio
         </div>
-
         <div class="btn-form">
             <button class="color-primary" ion-button block type="submit" [disabled]="!forma.valid">Iniciar Sesión</button>
         </div>
-
     </form>
-    
     <div class="btn-form center">
-        <button ion-button clear class="color-black" (click) = "inicioSesionFacebook()">Login with Facebook</button>  
-        <button ion-button clear class="color-black" (click) = "inicioSesionGoogle()">Login with Google</button>
-        <button ion-button clear class="color-black" (click) = "recuperarContrasena()">Olvide mi contraseña</button>
-        <button ion-button clear class="color-black" (click) = "nuevoUsuario()">Registrarme</button>
+        <button class="color-primary" ion-button block icon-start icon-only (click) = "inicioSesionFacebook()">
+            <ion-icon name='logo-facebook'></ion-icon>
+            Login with Facebook
+        </button>
+        <button class="color-primary margin-top" ion-button block icon-start icon-only (click) = "inicioSesionGoogle()">
+            <ion-icon name='logo-googleplus'></ion-icon>
+            Login with Google+
+        </button>
+        <!-- <button ion-button clear class="color-black" (click) = "inicioSesionFacebook()">Login with Facebook</button>  
+        <button ion-button clear class="color-black" (click) = "inicioSesionGoogle()">Login with Google</button> -->
         <!-- <button ion-button clear (click) = "signOut()">Logout</button>
         <button ion-button clear (click) = "logout()">Logout</button> -->
     </div>
-
+    <div col-sm-12 col-md-4 offset-md-4>
+        <!-- <div class="btn-form center margin-top">
+            <button ion-button clear class="color-black" (click) = "recuperarContrasena()">Olvide mi contraseña</button>
+            <button ion-button clear class="color-black" (click) = "nuevoUsuario()">Registrarme</button>
+        </div> -->
+        <ion-row margin-top>
+            <p no-margin>
+                <a style="text-decoration: none;" (click) = "recuperarContrasena()">Recuperar contraseña</a>
+            </p>
+        </ion-row>
+        <ion-row>
+            <p margin-top>
+                <a style="text-decoration: none;" (click) = "nuevoUsuario()"> <span>¿No tienes cuenta aún?</span> Registrate</a>
+            </p>
+        </ion-row>
+    </div>
 </ion-content>
+<ion-footer>
+    <ion-toolbar text-center text-uppercase>
+        <p>{{anio}} © Isuneon S.A.</p>
+    </ion-toolbar>
+</ion-footer>
+
+
+
+

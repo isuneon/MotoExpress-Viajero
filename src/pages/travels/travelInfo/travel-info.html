@@ -1,0 +1,67 @@
+<ion-header>
+	<ion-navbar>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-10 padding-vertical>
+                    <ion-title>Viaje en ejecución</ion-title>
+                </ion-col>
+                <ion-col text-right>
+                    <button class="btn-more-options" ion-button icon-only (click)="presentPopover($event)">
+                        <ion-icon name="more"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+  	</ion-navbar>
+</ion-header>
+<ion-content padding>
+    <!-- <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="map" item-start></ion-icon> Punto de llegada</ion-item-divider>
+        <ion-item>{{dataViajes['destinoText']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="walk" item-start></ion-icon> Distancia a recorrer</ion-item-divider>
+        <ion-item>{{dataViajes['distancia']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="time" item-start></ion-icon> Tiempo estimado de llegada</ion-item-divider>
+        <ion-item>{{displayTime}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="logo-usd" item-start></ion-icon>Tarifa del viaje</ion-item-divider>
+        <ion-item>{{dataViajes['precio']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="person" item-start></ion-icon>Nombre del conductor</ion-item-divider>
+        <ion-item>{{dataViajes['nombreConductor']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="call" item-start></ion-icon>Teléfono del conductor</ion-item-divider>
+        <ion-item>{{dataViajes['telefono']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="star" item-start></ion-icon>Calificación promedio del conductor</ion-item-divider>
+        <ion-item>{{dataViajes['promedioConductor'] | number : '1.2-2'}}</ion-item>
+    </ion-item-group> -->
+    <ion-item-group>
+        <ion-item-divider color="light">Información del viaje</ion-item-divider>
+        <ion-item><ion-icon name="map" item-start></ion-icon> Punto de llegada: {{dataViajes['destinoText']}}</ion-item>
+        <ion-item><ion-icon name="walk" item-start></ion-icon> Distancia a recorrer: {{dataViajes['distancia']}}</ion-item>
+        <ion-item><ion-icon name="time" item-start></ion-icon> Tiempo estimado de llegada: {{displayTime}}</ion-item>
+        <ion-item><ion-icon name="logo-usd" item-start></ion-icon> Tarifa del viaje: {{dataViajes['precio']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light">Información del conductor</ion-item-divider>
+        <ion-item><ion-icon name="person" item-start></ion-icon> Nombre: {{dataViajes['nombreConductor']}}</ion-item>
+        <ion-item><ion-icon name="call" item-start></ion-icon> Teléfono: {{dataViajes['telefono']}}</ion-item>
+        <ion-item><ion-icon name="star" item-start></ion-icon> Calificación promedio: {{dataViajes['promedioConductor'] | number : '1.2-2'}}</ion-item>
+    </ion-item-group>
+    <div padding-top>
+        <button class="color-primary" ion-button block (click) = "calificarViaje()">Calificar viaje</button>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar text-center text-uppercase>
+        <p>{{anio}} © Isuneon S.A.</p>
+    </ion-toolbar>
+</ion-footer>

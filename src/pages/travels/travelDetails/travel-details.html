@@ -4,32 +4,32 @@
   	</ion-navbar>
 </ion-header>
 <ion-content padding>
-	<ion-list>
-  		<ion-item>
-    		<ion-icon name="map" item-start></ion-icon>
-    		Distancia a recorrer
-    		<ion-note item-end>{{data['distancia']}}</ion-note>
-  		</ion-item>
-  		<ion-item>
-            <ion-icon name="car" item-start></ion-icon>
-            Origen
-            <ion-note item-end>{{data['origen']}}</ion-note>
-      </ion-item>
-      <ion-item>
-    		<ion-icon name="car" item-start></ion-icon>
-    		Destino
-    		<ion-note item-end>{{data['destino']}}</ion-note>
-  		</ion-item>
-  		<ion-item>
-        <ion-icon name="alarm" item-start></ion-icon>
-          Tiempo estimado de llegada
-          <ion-note item-end>{{data['duracion']}}</ion-note>
-      </ion-item>
-      <ion-item>
-    		<ion-icon name="card" item-start></ion-icon>
-      		Precio
-      		<ion-note item-end>{{data['precio']}}</ion-note>
-  		</ion-item>
-  		<button class="color-primary" ion-button block (click) = "showPrompt()">Tomar viaje</button>
-	</ion-list>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="walk" item-start></ion-icon> Distancia a recorrer</ion-item-divider>
+        <ion-item>{{dataViaje['distancia']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="map" item-start></ion-icon> Punto de partida</ion-item-divider>
+        <ion-item>{{dataViaje['origenText']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="map" item-start></ion-icon> Punto de llegada</ion-item-divider>
+        <ion-item>{{dataViaje['destinoText']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="time" item-start></ion-icon> Tiempo estimado de llegada</ion-item-divider>
+        <ion-item>{{dataViaje['duracion']}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light"><ion-icon name="logo-usd" item-start></ion-icon>Tarifa del viaje</ion-item-divider>
+        <ion-item>{{dataViaje['precio']}}</ion-item>
+    </ion-item-group>
+    <div padding-top> 
+	   <button class="color-primary" ion-button block (click) = "showPrompt()">Tomar viaje</button>
+    </div>
 </ion-content>
+<ion-footer>
+    <ion-toolbar text-center text-uppercase>
+        <p>{{anio}} © Isuneon S.A.</p>
+    </ion-toolbar>
+</ion-footer>

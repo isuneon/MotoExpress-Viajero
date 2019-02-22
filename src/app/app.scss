@@ -59,6 +59,11 @@
     background: #000 !important;
 }
 
+ion-footer .toolbar-background-md {
+    border-color: #b2b2b2 !important;
+    background: #f8f8f8 !important;
+}
+
 .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
     color: #FFFFFF !important;
 }
@@ -80,4 +85,8 @@
 	font-size: 16px; 
 	text-align: center; 
 	margin-top: 30px;
+}
+
+.margin-top{
+	margin-top: 16px;
 }

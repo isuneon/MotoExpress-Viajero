@@ -61,8 +61,8 @@
       "cordova-plugin-email-composer": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyCvivniFLkU-dvv84R2lMdR4wOQym7HuDM",
-        "API_KEY_FOR_IOS": "AIzaSyCvivniFLkU-dvv84R2lMdR4wOQym7HuDM"
+        "API_KEY_FOR_ANDROID": "AIzaSyA5MAt4D7mQpAFYsnXvfF-U9oFkLkiCmuQ",
+        "API_KEY_FOR_IOS": "AIzaSyA5MAt4D7mQpAFYsnXvfF-U9oFkLkiCmuQ"
       }
     },
     "platforms": [

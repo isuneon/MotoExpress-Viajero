@@ -8,6 +8,7 @@ import { UsersProvider } from '../../providers/users/users';
 import { PrincipalProvider } from '../../providers/principal';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import * as moment from 'moment';
 
 
 @IonicPage()
@@ -18,7 +19,8 @@ import * as firebase from 'firebase/app';
 export class LoginPage {
 
     forma : FormGroup;
-
+    anio: string;
+    
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams,
                 public loadingCtrl: LoadingController,
@@ -28,11 +30,12 @@ export class LoginPage {
                 public _principalProvider: PrincipalProvider,
                 private afAuth: AngularFireAuth) {
 
+        // this.anio = new Date().getFullYear();
+        this.anio = moment().format('YYYY') 
         this.forma = this.formBuilder.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])],
             password: ['', Validators.required],
         });
-    
     }
 
     /*inicioSesion(){
@@ -99,7 +102,8 @@ export class LoginPage {
    
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
-
+    
+    // ESTE ES EL QUE VA
     inicioSesion(){
         this.forma.controls['password'].setValue(this._principalProvider.encryptByDES(this.forma.controls['password']['value']));
         let loader = this._principalProvider.loading('Iniciando sesión');
@@ -114,6 +118,7 @@ export class LoginPage {
                     localStorage.setItem("user", data['nombre']);
                     localStorage.setItem("id", data['id']);
                     localStorage.setItem("procedencia", 'correo');
+                    localStorage.setItem("status", 'disponible');
                     this.navCtrl.setRoot(HomePage)
                 }
             }else{
@@ -125,6 +130,11 @@ export class LoginPage {
             console.log(error)
         });
     }
+
+
+    // inicioSesion(){
+    //     this.navCtrl.setRoot(TravelDetailsPage)
+    // }
 
 
     nuevoUsuario(){
@@ -167,6 +177,7 @@ export class LoginPage {
                 localStorage.setItem("user", res['data']['nombre']);
                 localStorage.setItem("id", res['data']['id']);
                 localStorage.setItem("procedencia", redSocial);
+                localStorage.setItem("status", 'disponible');
                 this.navCtrl.setRoot(HomePage)
             }else{
                 this.navCtrl.push(CreateUserPage, {data: info});

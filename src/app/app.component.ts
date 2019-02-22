@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { EditUserPage } from '../pages/users/editUser/edit-user';
+import { TravelNotificationPage } from '../pages/travels/travelNotification/travel-notification';
 import { PrincipalProvider } from '../providers/principal';
 import { AngularFireAuth } from 'angularfire2/auth';
 // import * as firebase from 'firebase/app';
@@ -68,6 +69,11 @@ export class MyApp {
 
     verPerfil(){
         this.nav.push(EditUserPage);
+    }
+
+
+    notificacionesViajes(){
+        this.nav.setRoot(TravelNotificationPage);
     }
 
 }

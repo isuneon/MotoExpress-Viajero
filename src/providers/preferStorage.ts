@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class PreferStorage {
 
     server = "/proxy";
-    // server = "https://webservicetaxiapp.appspot.com";
+    // server = "https://cors-anywhere.herokuapp.com/https://appviajes.herokuapp.com/";
 
     constructor(){ }
 
@@ -15,8 +15,11 @@ export class PreferStorage {
         "servicioTarifas": {
             "urlServicio":  this.server + "/rates"
         },
-        "servicioViajes": {
+        "servicioConductores": {
             "urlServicio":  this.server + "/drivers"
+        },
+        "servicioViajes": {
+            "urlServicio":  this.server + "/travels"
         }
     }
 

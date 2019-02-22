@@ -16,6 +16,7 @@ export class EditUserPage {
     forma : FormGroup;
     key: string = "";
     now:string = "";
+    anio: string;
 
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams,
@@ -26,6 +27,8 @@ export class EditUserPage {
                 public _usersProvider: UsersProvider,
                 public _principalProvider: PrincipalProvider) {
 
+        // this.anio = new Date().getFullYear();
+        this.anio = moment().format('YYYY')
         this.forma = this.formBuilder.group({
             first_name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
             last_name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],

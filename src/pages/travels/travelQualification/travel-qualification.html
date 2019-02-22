@@ -1,0 +1,32 @@
+<ion-header>
+	<ion-navbar>
+    	<ion-title>Calificación del viaje</ion-title>
+  	</ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-item-group>
+        <ion-item-divider color="light" *ngIf = "_principalProvider.getRol() == 'driver'">Información del viajero</ion-item-divider>
+        <ion-item-divider color="light" *ngIf = "_principalProvider.getRol() == 'traveler'">Información del conductor</ion-item-divider>
+
+        <ion-item><ion-icon name="person" item-start></ion-icon> Nombre: {{dataViajes['nombreConductor']}}</ion-item>
+        <ion-item><ion-icon name="call" item-start></ion-icon> Teléfono: {{dataViajes['telefono']}}</ion-item>
+
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light">Calificación</ion-item-divider>
+        <ion-item>
+            <ion-range min="0" max="5" snaps="true" pin="true" [(ngModel)]="calificacion" color="primary">
+                <ion-icon range-left name="thumbs-down"></ion-icon>
+                <ion-icon range-right name="thumbs-up"></ion-icon>
+            </ion-range>
+        </ion-item>
+    </ion-item-group>
+    <div padding-top>
+        <button class="color-primary" ion-button block (click) = "guardarCalificacion()">Enviar calificación</button>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar text-center text-uppercase>
+        <p>{{anio}} © Isuneon S.A.</p>
+    </ion-toolbar>
+</ion-footer>
