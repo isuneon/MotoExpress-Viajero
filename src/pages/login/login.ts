@@ -118,7 +118,8 @@ export class LoginPage {
                     localStorage.setItem("user", data['nombre']);
                     localStorage.setItem("id", data['id']);
                     localStorage.setItem("procedencia", 'correo');
-                    localStorage.setItem("status", 'disponible');
+                    data['type_acount'] == 'driver' ? localStorage.setItem("status", 'no disponible') : localStorage.setItem("status", 'disponible');     
+                    // localStorage.setItem("status", 'disponible');
                     this.navCtrl.setRoot(HomePage)
                 }
             }else{

@@ -85,6 +85,10 @@ export class PrincipalProvider {
         return localStorage.getItem("type_acount");
     }
 
+    getStatus(){
+        return localStorage.getItem("status");
+    }
+
     generateCodeRandom(){
         return Math.floor((Math.random() * 100000000) + 1)
     }

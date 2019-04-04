@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ActionSheetController  } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { TravelDetailsPage } from '../travels/travelDetails/travel-details';
+import { PrincipalProvider } from '../../providers/principal';
+import { TravelerDetailsPage } from '../travels/travelerDetails/traveler-details';
 import * as moment from 'moment';
 declare var google;
 
@@ -20,6 +22,28 @@ export class HomePage {
   	anio: string;
   	start:any;
   	end:any;
+
+  	tipoCuenta: string = "";
+  	estatus: string = "";
+
+  	viajeros = {
+        "latitude": 10.4936611,
+        "longitude": -66.8261156,
+        "apellido": "Gonzalez Fermin",
+        "autorizado": "true",
+        "correo": "billyrogers07@gmail.com",
+        "documento_identidad": "21134094",
+        "fecha_nacimiento": "2018-08-16",
+        "genero": "M",
+        "id": "-LK1xQAXsNfigb-n47XT",
+        "nombre": "Billy Rogers",
+        "password": "y2ubsi0NI1H77EYpb5dQzw==",
+        "status": "disponible",
+        "type_acount": "traveler",
+        "telefono": "04249876543",
+        "calificacion": "50",
+        "viajesTomados": "10"
+    };
 
 	/*markers: any[] = [{
 	    position:{
@@ -57,7 +81,12 @@ export class HomePage {
 
 
 	constructor(public navCtrl: NavController,
-		        private geolocation: Geolocation) {
+		        private geolocation: Geolocation,
+		        public actionSheetCtrl: ActionSheetController,
+		        public _principalProvider: PrincipalProvider) {
+
+		this.tipoCuenta = localStorage.getItem("type_acount")
+		this.estatus = localStorage.getItem("status")
 
 		this.anio = moment().format('YYYY')
     	this.directionsService = new google.maps.DirectionsService();
@@ -71,6 +100,9 @@ export class HomePage {
 
 	ionViewDidLoad(){
     	this.getPosition();
+    	if(this.estatus == 'no disponible'){
+    		this._principalProvider.showAlert("Aviso", "Te encuentras desconectado. Conectate presionando el boton en la esquina inferior izquierda")
+    	}
   	}
 
 
@@ -210,4 +242,48 @@ export class HomePage {
 
 		this.navCtrl.push(TravelDetailsPage, {data: info})
 	}
+
+
+	iniciarViajes(){
+		this._principalProvider.loadingTemp("Conectandote...")
+		setTimeout(() => {
+            this.presentActionSheet()
+        }, 2000);
+		localStorage.setItem("status", 'disponible');
+	}
+
+
+	presentActionSheet() {
+	    const actionSheet = this.actionSheetCtrl.create({
+      		title: 'Nueva solicitud de viaje',
+      		subTitle: 'Calificación del viajero: '+ (parseInt(this.viajeros['calificacion']) / parseInt(this.viajeros['viajesTomados'])).toFixed(2) + ' ★',
+      		cssClass: 'action-sheets-basic-page',
+      		buttons: [
+      			{
+	          		text: 'Aceptar',
+	          		role: 'destructive',
+	          		icon: 'checkmark',
+	          		handler: () => {
+	          			this._principalProvider.loadingTemp("Cargando información del viaje...")
+	          			this.viajeros['promedio'] = parseInt(this.viajeros['calificacion']) / parseInt(this.viajeros['viajesTomados']);
+	            		this.navCtrl.setRoot(TravelerDetailsPage, {data: this.viajeros, posicion: this.myLatLng})
+	          		}
+	        	},{
+	          		text: 'Rechazar',
+	          		cssClass: 'button-cancel',
+	          		icon: 'close',
+	          		handler: () => {
+	            		this._principalProvider.showAlert('Aviso', 'Viaje rechazado')
+	          		}
+	        	}
+	      	]
+	    });
+	    actionSheet.present();
+	}
+
+
+	cancelarViajes(){
+        this._principalProvider.loadingTemp("Desconectandote...")
+        localStorage.setItem("status", "no disponible");
+    }
 }

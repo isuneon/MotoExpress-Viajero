@@ -56,6 +56,7 @@ export class MyApp {
         localStorage.removeItem("user");
         localStorage.removeItem("id");
         localStorage.removeItem("procedencia");
+        localStorage.removeItem("status");
         this.nav.setRoot(LoginPage)
     }
 
@@ -73,7 +74,13 @@ export class MyApp {
 
 
     notificacionesViajes(){
-        this.nav.setRoot(TravelNotificationPage);
+        this.nav.push(TravelNotificationPage);
+    }
+
+
+    cancelarViajes(){
+        this.loading("Desconectandote...")
+        localStorage.setItem("status", "no disponible");
     }
 
 }

@@ -7,7 +7,7 @@
   "proxies": [
     {
       "path": "/proxy",
-      "proxyUrl": "http://localhost:8000"
+      "proxyUrl": "http://localhost:8000/"
     }
   ]
 }

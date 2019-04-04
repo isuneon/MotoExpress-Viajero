@@ -11,9 +11,13 @@
 </ion-header>
 
 <ion-content class="prueba">
-	
+	<ion-fab bottom left *ngIf = "_principalProvider.getRol() == 'driver' && _principalProvider.getStatus() == 'no disponible'" (click) = "iniciarViajes()">
+	    <button ion-fab mini color="secondary"><ion-icon name="power"></ion-icon></button>
+  	</ion-fab>
+  	<ion-fab bottom left *ngIf = "_principalProvider.getRol() == 'driver' && _principalProvider.getStatus() == 'disponible'" (click) = "cancelarViajes()">
+	    <button ion-fab mini color="danger"><ion-icon name="power"></ion-icon></button>
+  	</ion-fab>
 	<div id="map"></div>
-
 	<!-- esto es para la informacion de como llegar, esto se puede eliminar -->
   	<!-- <ion-scroll scrollY="true" class="scroll">
     	<div padding-horizontal id="panel"></div>

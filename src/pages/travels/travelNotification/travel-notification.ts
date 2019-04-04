@@ -80,8 +80,6 @@ export class TravelNotificationPage {
         for(let x in this.viajeros){
             this.viajeros[x]['promedio'] = parseInt(this.viajeros[x]['calificacion']) / parseInt(this.viajeros[x]['viajesTomados'])
         }
-
-		
     }
 
     ionViewDidLoad() {
