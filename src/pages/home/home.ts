@@ -216,13 +216,15 @@ export class HomePage {
 			avoidTolls: true
 		}, (response, status)=> {
 			if(status === google.maps.DirectionsStatus.OK) {
-		      this.directionsDisplay.setDirections(response);
-		      let distancia = response['routes'][0]['legs'][0]['distance']['text']
-		      let duracion = response['routes'][0]['legs'][0]['duration']['text']
-		      let tiempoLlegada = response['routes'][0]['legs'][0]['duration']['value']
-		      let origenText = response['routes'][0]['legs'][0]['start_address']
-		      let destinoText = response['routes'][0]['legs'][0]['end_address']
-		      this.infoViaje(distancia, duracion, tiempoLlegada, origenText, destinoText, destino)
+				this.directionsDisplay.setDirections(response);
+				let distancia = response['routes'][0]['legs'][0]['distance']['text']
+				let duracion = response['routes'][0]['legs'][0]['duration']['text']
+				let tiempoLlegada = response['routes'][0]['legs'][0]['duration']['value']
+				let origenText = response['routes'][0]['legs'][0]['start_address']
+				let destinoText = response['routes'][0]['legs'][0]['end_address']
+	      		setTimeout(() => {
+		      		this.infoViaje(distancia, duracion, tiempoLlegada, origenText, destinoText, destino)
+		        }, 1500);
 		    }else{
 		      alert('Could not display directions due to: ' + status);
 		    }

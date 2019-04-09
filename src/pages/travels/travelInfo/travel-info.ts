@@ -35,7 +35,6 @@ export class TravelInfoPage {
         this.anio = moment().format('YYYY') 
         this.dataConductores = navParams.get("dataConductores");
         this.dataViajes = navParams.get("dataViaje");
-        console.log(this.dataViajes['tiempoLlegada'])
         this.initTimer();
         this.obtenerMensajeCancelacion()
 		

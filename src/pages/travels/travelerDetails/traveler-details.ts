@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { PrincipalProvider } from '../../../providers/principal';
 import { TravelsProvider } from '../../../providers/travels/travels';
 import { TravelInfoPage } from '../travelInfo/travel-info';
+import { ModalPage } from '../../modal/modal' ;
+
 declare var google;
 
 
@@ -26,6 +28,7 @@ export class TravelerDetailsPage {
 
 	constructor(public navCtrl: NavController,
 				public navParams: NavParams,
+                public modalCtrl: ModalController,
                 public _travelsProvider: TravelsProvider,
 				public _principalProvider: PrincipalProvider) {
 
@@ -210,6 +213,16 @@ export class TravelerDetailsPage {
             console.log(error)
         });    
         
+    }
+
+
+    abrirModal(){
+        let modal = this.modalCtrl.create(ModalPage, {data: this.dataViajero});
+        modal.present();
+
+        modal.onDidDismiss((data) =>{
+            console.log(data)
+        })
     }
 
 }

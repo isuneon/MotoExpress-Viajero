@@ -29,6 +29,8 @@ import { PopoverTravelPage } from '../pages/travels/popoverTravel/popover-travel
 import { TravelQualificationPage } from '../pages/travels/travelQualification/travel-qualification';
 import { TravelNotificationPage } from '../pages/travels/travelNotification/travel-notification';
 import { TravelerDetailsPage } from '../pages/travels/travelerDetails/traveler-details';
+import { ModalPage } from '../pages/modal/modal';
+
 
 
 /* Providers */
@@ -65,7 +67,8 @@ export const firebaseConfig = {
         DriversDetailsPage,
         TravelQualificationPage,
         TravelNotificationPage,
-        TravelerDetailsPage
+        TravelerDetailsPage,
+        ModalPage
     ],
     imports: [
         BrowserModule,
@@ -96,7 +99,8 @@ export const firebaseConfig = {
         DriversDetailsPage,
         TravelQualificationPage,
         TravelNotificationPage,
-        TravelerDetailsPage
+        TravelerDetailsPage,
+        ModalPage
     ],
     providers: [
         StatusBar,
