@@ -7,6 +7,7 @@ export interface User {
 	correo: string,
 	password: string,
 	type_acount: string,
+	status: string,
 	autorizado: boolean,
 	marca?: string,
 	modelo?: string,

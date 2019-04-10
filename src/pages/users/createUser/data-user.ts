@@ -117,7 +117,8 @@ export class DataUserPage {
             correo: info['controls']['email']['value'],
             password: pwd,
             type_acount: forma.controls['type_acount']['value'],
-            autorizado: forma.controls['type_acount']['value'] == 'driver' ? false : true
+            autorizado: forma.controls['type_acount']['value'] == 'driver' ? false : true,
+            status: 'disponible'
         }
 
         if(forma.controls['type_acount']['value'] == 'driver'){

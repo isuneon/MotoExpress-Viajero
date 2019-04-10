@@ -5,6 +5,7 @@ export class PreferStorage {
 
     server = "/proxy";
     // server = "https://cors-anywhere.herokuapp.com/https://appviajes.herokuapp.com/";
+    // server = "https://cors-anywhere.herokuapp.com/https://wsappviajes.herokuapp.com/";
 
     constructor(){ }
 
