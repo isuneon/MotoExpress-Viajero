@@ -18,7 +18,6 @@ export class DriversDetailsPage {
 	idConductor:string;
 	nombreConductor:string;
 	loaderViaje:any;
-	km:number;
 	viajesTomados: number;
 	anio: string;
 
@@ -27,16 +26,16 @@ export class DriversDetailsPage {
 				public _travelsProvider: TravelsProvider,
 		  		public navParams: NavParams) {
 
-		// this.anio = new Date().getFullYear();
 		this.anio = moment().format('YYYY') 
 		this.dataConductores = navParams.get("data");
 		this.dataViajes = navParams.get("dataViaje");
-		this.km = navParams.get("kmAbarcar");
 	}
+
 
 	ionViewDidLoad() {
 		
 	}
+
 
 	confirmarViaje(dataConductor){
 		this.dataViajes['idConductor'] = dataConductor['id']
@@ -92,8 +91,8 @@ export class DriversDetailsPage {
         });	
     }
 
-	guardarInfoViaje(){
 
+	guardarInfoViaje(){
 		let datos = {
 			nombreConductor: this.dataViajes['nombreConductor'],
 			idConductor: this.dataViajes['idConductor'],
@@ -126,7 +125,6 @@ export class DriversDetailsPage {
 
 
 	actualizarViajesTomados(){
-
 		let datos = {
 			idConductor: this.dataViajes['idConductor'],
 			viajesTomados: this.dataViajes['viajesTomados'] + 1
@@ -140,7 +138,6 @@ export class DriversDetailsPage {
         error => {
             console.log(error)
         });	
-		
 	}
 
 }

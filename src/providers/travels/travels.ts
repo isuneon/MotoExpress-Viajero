@@ -92,4 +92,10 @@ export class TravelsProvider {
         })
     }
 
+
+    obtenerPais(){
+        return this.http.get(`${this._preferStorage.dict.servicioViajes.urlServicio}/country`).map( res => {
+            return res.json();
+        })
+    }
 }

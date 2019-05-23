@@ -7,10 +7,8 @@
     <ion-item-group>
         <ion-item-divider color="light" *ngIf = "_principalProvider.getRol() == 'driver'">Información del viajero</ion-item-divider>
         <ion-item-divider color="light" *ngIf = "_principalProvider.getRol() == 'traveler'">Información del conductor</ion-item-divider>
-
         <ion-item><ion-icon name="person" item-start></ion-icon> Nombre: {{dataViajes['nombreConductor']}}</ion-item>
         <ion-item><ion-icon name="call" item-start></ion-icon> Teléfono: {{dataViajes['telefono']}}</ion-item>
-
     </ion-item-group>
     <ion-item-group>
         <ion-item-divider color="light">Calificación</ion-item-divider>

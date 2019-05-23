@@ -10,7 +10,10 @@ import { ChangePasswordPage } from '../changePassword/change-password';
 export class PopoverPage {
   
 	constructor(public viewCtrl: ViewController,
-				public navCtrl: NavController) {}
+				public navCtrl: NavController) {
+
+	}
+
 
 	viewForm() {
 		this.navCtrl.push(ChangePasswordPage);

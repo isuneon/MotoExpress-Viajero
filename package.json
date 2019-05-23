@@ -1,8 +1,8 @@
 {
-  "name": "servicesApp",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "MotoExpress",
+  "version": "1.0.0",
+  "author": "Isuneon C.A",
+  "homepage": "http://isuneon.com",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",

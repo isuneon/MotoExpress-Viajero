@@ -18,22 +18,20 @@ export class TravelQualificationPage {
     calificacion:string;
     anio: string;
 
+
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams,
                 public _principalProvider: PrincipalProvider,
                 public _travelsProvider: TravelsProvider) {
 
-        // this.anio = new Date().getFullYear();
         this.anio = moment().format('YYYY')
         this.dataConductores = navParams.get("dataConductores");
         this.dataViajes = navParams.get("dataViajes");
-
-        /*nuevo*/
         if(localStorage.getItem('type_acount') == 'driver'){
             this.dataViajes['nombreConductor'] = this.dataViajes['nombre']
         }
-		/*nuevo*/
     }
+
 
     ionViewDidLoad() {
 		

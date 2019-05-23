@@ -5,10 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { EditUserPage } from '../pages/users/editUser/edit-user';
-import { TravelNotificationPage } from '../pages/travels/travelNotification/travel-notification';
 import { PrincipalProvider } from '../providers/principal';
 import { AngularFireAuth } from 'angularfire2/auth';
-// import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -18,8 +16,6 @@ export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any;
-    rol:string = "";
-    username: string = "";
 
     constructor(public platform: Platform, 
                 public statusBar: StatusBar,
@@ -39,12 +35,23 @@ export class MyApp {
 
     initializeApp() {
         this.platform.ready().then(() => {
+            this.hideSplashScreen();
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
-            this.splashScreen.hide();
+            // this.splashScreen.hide();
         });
     }
+
+
+    hideSplashScreen() {
+        if (this.splashScreen) {
+            setTimeout(() => {
+                this.splashScreen.hide();
+            }, 100);
+        }
+    }
+
 
     cerrarSesion(){
         this.loading('Cerrando sesión');
@@ -57,8 +64,10 @@ export class MyApp {
         localStorage.removeItem("id");
         localStorage.removeItem("procedencia");
         localStorage.removeItem("status");
+        localStorage.removeItem("country");
         this.nav.setRoot(LoginPage)
     }
+
 
     loading(texto) {
         let loader = this.loadingCtrl.create({
@@ -68,19 +77,8 @@ export class MyApp {
         loader.present();
     }
 
+
     verPerfil(){
         this.nav.push(EditUserPage);
     }
-
-
-    notificacionesViajes(){
-        this.nav.push(TravelNotificationPage);
-    }
-
-
-    cancelarViajes(){
-        this.loading("Desconectandote...")
-        localStorage.setItem("status", "no disponible");
-    }
-
 }

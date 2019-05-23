@@ -31,7 +31,6 @@ export class TravelInfoPage {
                 public _principalProvider: PrincipalProvider,
                 public _travelsProvider: TravelsProvider) {
 
-        // this.anio = new Date().getFullYear();
         this.anio = moment().format('YYYY') 
         this.dataConductores = navParams.get("dataConductores");
         this.dataViajes = navParams.get("dataViaje");
@@ -59,6 +58,7 @@ export class TravelInfoPage {
         this.hasFinished = true;
         this.navCtrl.setRoot(TravelQualificationPage, {dataConductores: this.dataConductores, dataViajes:this.dataViajes})
     }
+
 
     initTimer() {
         if (!this.timeInSeconds) { 
@@ -129,14 +129,8 @@ export class TravelInfoPage {
 
 
     cambiarEstatusConductor(){
-        /*NUEVO*/
         let id = "";
-        if(localStorage.getItem('type_acount') == 'driver'){
-            id = localStorage.getItem("id");
-        }else{
-            id = this.dataViajes['idConductor']
-        }
-        /*NUEVO*/
+        localStorage.getItem('type_acount') == 'driver' ? id = localStorage.getItem("id") : id = this.dataViajes['idConductor']
 
         this._travelsProvider.cambiarEstatusConductor(id, "disponible").subscribe(res => {
             if(res['status'] == "200"){
@@ -151,14 +145,8 @@ export class TravelInfoPage {
 
 
     cambiarEstatusViajero(){
-        /*NUEVO*/
         let id = "";
-        if(localStorage.getItem('type_acount') == 'driver'){
-            id = this.dataViajes['id']
-        }else{
-            id = localStorage.getItem("id");
-        }
-        /*NUEVO*/
+        localStorage.getItem('type_acount') == 'driver' ? id = this.dataViajes['id'] : id = localStorage.getItem("id")
 
         this._travelsProvider.cambiarEstatusViajero(id, "disponible").subscribe(res => {
             if(res['status'] == "200"){
@@ -170,31 +158,4 @@ export class TravelInfoPage {
             console.log(error)
         }); 
     }
-
-
-    // cambiarEstatusConductor(){
-    //     this._travelsProvider.cambiarEstatusConductor(this.dataViajes['idConductor'], "disponible").subscribe(res => {
-    //         if(res['status'] == "200"){
-    //         }else{
-    //             this._principalProvider.showAlert('Error', 'Ocurrió un error intentando actualizar el estatus del conductor');
-    //         }
-    //     },
-    //     error => {
-    //         console.log(error)
-    //     }); 
-    // }
-
-
-    // cambiarEstatusViajero(){
-    //     this._travelsProvider.cambiarEstatusViajero(localStorage.getItem("id"), "disponible").subscribe(res => {
-    //         if(res['status'] == "200"){
-    //         }else{
-    //             this._principalProvider.showAlert('Error', 'Ocurrió un error intentando actualizar el estatus del viajero');
-    //         }
-    //     },
-    //     error => {
-    //         console.log(error)
-    //     }); 
-    // }
-
 }

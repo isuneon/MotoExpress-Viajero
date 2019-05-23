@@ -8,6 +8,7 @@ import { User } from '../../../interface/user.interface';
 import { AngularFireStorage } from 'angularfire2/storage';
 import * as moment from 'moment';
 
+
 @Component({
     selector: 'page-data-user',
     templateUrl: 'data-user.html',
@@ -21,6 +22,7 @@ export class DataUserPage {
     prueba: any;
     anio: string;
     
+
     constructor(public navCtrl: NavController, 
                 public nav: Nav,
                 public navParams: NavParams,
@@ -31,7 +33,6 @@ export class DataUserPage {
                 public _principalProvider: PrincipalProvider,
                 public storage: AngularFireStorage) {
 
-        // this.anio = new Date().getFullYear();
         this.anio = moment().format('YYYY')
         this.data = navParams.get("data");
         this.forma = this.formBuilder.group({
@@ -46,32 +47,10 @@ export class DataUserPage {
         });
     }
 
+
     setTypeAcount(tipo){
         this.typeAcount = tipo;
     }
-
-
-    /*createUser(){
-        console.log(this.forma.controls['picture']['value'])
-
-        let nuevoUsuario = false;
-        let pwdEncrypt = this._principalProvider.encryptByDES(this.data.controls['password1']['value'])
-        let loader = this._principalProvider.loading('Registrando usuario');
-        this._usersProvider.comprobarEmail(this.data.controls['email'].value).snapshotChanges().subscribe(actions => {
-            if(actions.length > 0){
-                let dataFormateada = this.formatData(this.forma, this.data, pwdEncrypt);
-                this._usersProvider.agregar(dataFormateada);
-                this._principalProvider.showAlert('Éxito', 'Usuario registrado exitosamente');
-                this.nav.setRoot(LoginPage)
-                nuevoUsuario = true;
-            }else{
-                if(nuevoUsuario == false){
-                    this._principalProvider.showAlert('Error', 'Este correo ya se encuentra en uso. Intente con otro correo');
-                }
-            }
-        });
-        loader.dismiss();
-    }*/
 
 
     uploadFile(event){
@@ -81,7 +60,6 @@ export class DataUserPage {
         console.log(task)
     }
 
-/*----------------------------------------------------------------------------------------------------------------------------------------*/
 
     createUser(){
         let pwdEncrypt = this._principalProvider.encryptByDES(this.data.controls['password1']['value'])
@@ -106,6 +84,7 @@ export class DataUserPage {
             console.log(error)
         });
     }
+
 
     formatData(forma, info, pwd){
         this.dataUser = {

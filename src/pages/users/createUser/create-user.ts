@@ -24,7 +24,6 @@ export class CreateUserPage {
                 public _usersProvider: UsersProvider,
                 public _principalProvider: PrincipalProvider) {
 
-        // this.anio = new Date().getFullYear();
         this.anio = moment().format('YYYY')
         this.data = navParams.get("data");
 

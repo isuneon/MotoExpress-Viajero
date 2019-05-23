@@ -24,7 +24,6 @@ export class ChangePasswordPage {
                 public _usersProvider: UsersProvider,
                 public _principalProvider: PrincipalProvider) {
 
-        // this.anio = new Date().getFullYear();
         this.anio = moment().format('YYYY')
         this.forma = this.formBuilder.group({
             password: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
@@ -35,28 +34,6 @@ export class ChangePasswordPage {
         this.forma.controls['password2'].setValidators([Validators.required, this.noIgual.bind(this.forma)])
     }
 
-    /*updatePassword(){
-        let loader = this._principalProvider.loading('Actualizando contraseña');
-        this._usersProvider.comprobarEmail(localStorage.getItem("email")).snapshotChanges().subscribe(actions => {
-            if(actions.length > 0){
-                let password = actions[0]['payload'].val()['password']
-                this.key = actions[0]['key']
-                let pwdEncrypt = this._principalProvider.encryptByDES(this.forma.controls['password']['value'])
-                if(password == pwdEncrypt){
-                    let newPwdEncrypt = this._principalProvider.encryptByDES(this.forma.controls['password1']['value']);
-                    this._usersProvider.changePassword(this.key, newPwdEncrypt);
-                }
-                // else{
-                //     this._principalProvider.showAlert('Error', 'La contraseña actual es incorrecta');
-                // }
-            }else{
-                this._principalProvider.showAlert('Error', 'Ocurrió un error al intentar consultar la información del usuario')
-            }
-            loader.dismiss();
-        });
-    }*/
-
-/*---------------------------------------------------------------------------------------------------------------------------------------*/
 
     updatePassword(){
         let loader = this._principalProvider.loading('Actualizando contraseña');

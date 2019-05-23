@@ -3,7 +3,6 @@ import { NavController, ActionSheetController  } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { TravelDetailsPage } from '../travels/travelDetails/travel-details';
 import { PrincipalProvider } from '../../providers/principal';
-import { TravelerDetailsPage } from '../travels/travelerDetails/traveler-details';
 import * as moment from 'moment';
 declare var google;
 
@@ -20,64 +19,6 @@ export class HomePage {
   	myLatLng: any;
   	waypoints: any[];
   	anio: string;
-  	start:any;
-  	end:any;
-
-  	tipoCuenta: string = "";
-  	estatus: string = "";
-
-  	viajeros = {
-        "latitude": 10.4936611,
-        "longitude": -66.8261156,
-        "apellido": "Gonzalez Fermin",
-        "autorizado": "true",
-        "correo": "billyrogers07@gmail.com",
-        "documento_identidad": "21134094",
-        "fecha_nacimiento": "2018-08-16",
-        "genero": "M",
-        "id": "-LK1xQAXsNfigb-n47XT",
-        "nombre": "Billy Rogers",
-        "password": "y2ubsi0NI1H77EYpb5dQzw==",
-        "status": "disponible",
-        "type_acount": "traveler",
-        "telefono": "04249876543",
-        "calificacion": "50",
-        "viajesTomados": "10"
-    };
-
-	/*markers: any[] = [{
-	    position:{
-	      latitude: 10.4989147,
-	      longitude: -66.8334514,
-	    },
-	    title:'Casa',
-	    icon: "assets/imgs/iconoa.svg"
-	  },
-	  {
-	    position:{
-	      latitude: 10.4936611,
-	      longitude: -66.8261156,
-	    },
-	    title:'Experimental',
-	    icon: "assets/imgs/iconoa.svg"
-	  },
-	  {
-	    position:{
-	      latitude: 10.4907889,
-	      longitude: -66.8059144,
-	    },
-	    title:'Plan Suarez',
-	    icon: "assets/imgs/iconob.svg"
-	  },
-	  {
-	    position:{
-	      latitude: 10.4950298,
-	      longitude: -66.801985,
-	    },
-	    title:'Makro',
-	    icon: "assets/imgs/iconob.svg"
-	  },
-	];*/
 
 
 	constructor(public navCtrl: NavController,
@@ -85,24 +26,20 @@ export class HomePage {
 		        public actionSheetCtrl: ActionSheetController,
 		        public _principalProvider: PrincipalProvider) {
 
-		this.tipoCuenta = localStorage.getItem("type_acount")
-		this.estatus = localStorage.getItem("status")
-
 		this.anio = moment().format('YYYY')
     	this.directionsService = new google.maps.DirectionsService();
     	this.directionsDisplay = new google.maps.DirectionsRenderer();
     	this.bounds = new google.maps.LatLngBounds();
-    	this.waypoints = [{
-			location: { lat: 10.4989147, lng: -66.8334514 },
-			stopover: true,
-		}];
 	}
+
 
 	ionViewDidLoad(){
     	this.getPosition();
-    	if(this.estatus == 'no disponible'){
-    		this._principalProvider.showAlert("Aviso", "Te encuentras desconectado. Conectate presionando el boton en la esquina inferior izquierda")
-    	}
+    	// obtener las coordenadas cada vez que estas cambien
+    	/*let watch = this.geolocation.watchPosition();
+		watch.subscribe((data) => {
+	 		console.log(data)
+		});*/
   	}
 
 
@@ -114,6 +51,7 @@ export class HomePage {
 			console.log(error);
 		})
 	}
+
 
 	loadMap(position: Geoposition){
 		let latitude = position.coords.latitude;
@@ -146,21 +84,8 @@ export class HomePage {
 			});
 			mapEle.classList.add('show-map');
 		});
-
-
-		/*this.markers.forEach(marker1=>{
-	        this.addMarker(marker1);
-		});*/
 	}
 
-	addMarker(options){
-		new google.maps.Marker({
-			position: {lat: options.position.latitude, lng: options.position.longitude},
-	      	title: options.title,
-	      	icon: options.icon,
-	      	map: this.map,
-	    })
-	}
 
 	searchPlace(){
 		let input = document.getElementById('googlePlaces').getElementsByTagName('input')[0];
@@ -168,9 +93,8 @@ export class HomePage {
 
 		let options = {
 	  		// types: ['(regions)'],
-	  		componentRestrictions: {country: 'VE'}
+	  		componentRestrictions: {country: this._principalProvider.getCountry()}
 		};
-
 
 		// let autocomplete = new google.maps.places.Autocomplete(input, {types: ['geocode']});
 		let autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -182,35 +106,21 @@ export class HomePage {
 		});
 	}
 
+
 	calculateRoute(destino){
 		this.bounds.extend(destino);
 
-		this.start  = new google.maps.Marker({
-			position: new google.maps.LatLng(this.myLatLng),
-		 	icon: "assets/imgs/iconoa.svg",
-		 	map: this.map  
-		 });
+		// Setear el icono para el punto de origen
+		this.addMarker(this.myLatLng['lat'], this.myLatLng['lng'], "assets/imgs/iconoa.svg");
 
-		this.end = new google.maps.Marker({
-			position: new google.maps.LatLng(destino.lat, destino.lng),
-			icon: "assets/imgs/iconob.svg",
-		 	map: this.map 
-		});
-
-		this.waypoints.forEach(waypoint => {
-			var point = new google.maps.LatLng(waypoint.location.lat, waypoint.location.lng);
-			this.bounds.extend(point);
-		});
+		// Setear el icono para el punto de llegada
+		this.addMarker(destino.lat, destino.lng, "assets/imgs/iconob.svg");
 
 		this.map.fitBounds(this.bounds);
 
-
 		this.directionsService.route({
 			origin: new google.maps.LatLng(this.myLatLng),
-			// origin: this.start,
 			destination: new google.maps.LatLng(destino.lat, destino.lng),
-			// destination: this.end,
-			// waypoints: this.waypoints,
 			optimizeWaypoints: true,
 			travelMode: google.maps.TravelMode.DRIVING,
 			avoidTolls: true
@@ -231,6 +141,7 @@ export class HomePage {
 		});  
 	}
 
+
 	infoViaje(distancia, duracion, tiempoLlegada, origenText, destinoText, destino){
 		let info = {
 			"distancia": distancia,
@@ -241,51 +152,15 @@ export class HomePage {
 			"destino": destino,
 			"origen": this.myLatLng
 		}
-
 		this.navCtrl.push(TravelDetailsPage, {data: info})
 	}
+	
 
-
-	iniciarViajes(){
-		this._principalProvider.loadingTemp("Conectandote...")
-		setTimeout(() => {
-            this.presentActionSheet()
-        }, 2000);
-		localStorage.setItem("status", 'disponible');
+	addMarker(lat, lng, icon){
+		new google.maps.Marker({
+			position: new google.maps.LatLng(lat, lng),
+	      	icon: icon,
+	      	map: this.map,
+	    })
 	}
-
-
-	presentActionSheet() {
-	    const actionSheet = this.actionSheetCtrl.create({
-      		title: 'Nueva solicitud de viaje',
-      		subTitle: 'Calificación del viajero: '+ (parseInt(this.viajeros['calificacion']) / parseInt(this.viajeros['viajesTomados'])).toFixed(2) + ' ★',
-      		cssClass: 'action-sheets-basic-page',
-      		buttons: [
-      			{
-	          		text: 'Aceptar',
-	          		role: 'destructive',
-	          		icon: 'checkmark',
-	          		handler: () => {
-	          			this._principalProvider.loadingTemp("Cargando información del viaje...")
-	          			this.viajeros['promedio'] = parseInt(this.viajeros['calificacion']) / parseInt(this.viajeros['viajesTomados']);
-	            		this.navCtrl.setRoot(TravelerDetailsPage, {data: this.viajeros, posicion: this.myLatLng})
-	          		}
-	        	},{
-	          		text: 'Rechazar',
-	          		cssClass: 'button-cancel',
-	          		icon: 'close',
-	          		handler: () => {
-	            		this._principalProvider.showAlert('Aviso', 'Viaje rechazado')
-	          		}
-	        	}
-	      	]
-	    });
-	    actionSheet.present();
-	}
-
-
-	cancelarViajes(){
-        this._principalProvider.loadingTemp("Desconectandote...")
-        localStorage.setItem("status", "no disponible");
-    }
 }

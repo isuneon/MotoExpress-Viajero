@@ -23,6 +23,7 @@ export class PrincipalProvider {
         return loader;
     }
 
+
     showAlert(title, texto) {
         let alert = this.alertCtrl.create({
             title: title,
@@ -32,6 +33,7 @@ export class PrincipalProvider {
         alert.present();
     }
 
+
     loadingTemp(texto) {
         let loader = this.loadingCtrl.create({
             content: texto,
@@ -39,6 +41,7 @@ export class PrincipalProvider {
         });
         loader.present();
     }
+
 
     presentToast(texto, posicion, tiempo = 3000){
         const toast = this.toastCtrl.create({
@@ -48,6 +51,7 @@ export class PrincipalProvider {
         });
         toast.present();
     }
+
 
     encryptByDES(message) {
 
@@ -59,6 +63,7 @@ export class PrincipalProvider {
 
         return encrypted.toString();
     }
+
 
     decryptByDES(ciphertext) {
 
@@ -73,35 +78,48 @@ export class PrincipalProvider {
         return decrypted.toString(CryptoJS.enc.Utf8);
     }
 
+
     getUser(){
         return localStorage.getItem("user");
     }
+
 
     getEmail(){
         return localStorage.getItem("email");
     }
 
+
     getRol(){
         return localStorage.getItem("type_acount");
     }
+
 
     getStatus(){
         return localStorage.getItem("status");
     }
 
+
+    getCountry(){
+        return localStorage.getItem("country");
+    }
+
+
     generateCodeRandom(){
         return Math.floor((Math.random() * 100000000) + 1)
     }
 
+
     formatDate(fecha, formato){
         return moment(fecha).format(formato)
     }
+
 
     configurarCabeceraPost() {
         let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
         let options = new RequestOptions({ method: RequestMethod.Post, headers: headers });
         return options
     }
+
 
     serializeParams(data){
         let params = new URLSearchParams();

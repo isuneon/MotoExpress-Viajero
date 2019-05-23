@@ -5,29 +5,31 @@
 </ion-header>
 <ion-content padding>
 	<ion-card *ngFor="let item of dataConductores">
-  		<ion-item>
-    		<ion-avatar item-start>
-  				<img src="assets/imgs/avatar.png">
-    		</ion-avatar>
-    		<h2>{{item['nombre']}}</h2>
-    		<p>{{item['promedio'] | number : '1.2-2'}}   <ion-icon name="star" style="color: #D7DD20;"></ion-icon></p>
-  		</ion-item>
-  		<ion-card-content>
-			<p>Distancia en la que se encuentra: {{item['distanciaKM']}}</p>
-  		</ion-card-content>
-  		<ion-grid>
-			<ion-row>
-				<ion-col>
-					<ion-item>
-						<div>Estatus del condutor:  {{item['status']}}</div>
-  					</ion-item>
-			    </ion-col>
-			    <ion-col></ion-col>
-			    <ion-col>
-			      <button ion-button class="color-primary" (click) = "confirmarViaje(item)">Tomar viaje</button>
-			    </ion-col>
-			</ion-row>
-		</ion-grid>
+		<div *ngIf = "item['mostrar']">
+	  		<ion-item>
+	    		<ion-avatar item-start>
+	  				<img src="assets/imgs/avatar.png">
+	    		</ion-avatar>
+	    		<h2>{{item['nombre']}}</h2>
+	    		<p>{{item['promedio'] | number : '1.2-2'}}   <ion-icon name="star" style="color: #D7DD20;"></ion-icon></p>
+	  		</ion-item>
+	  		<ion-card-content>
+				<p>Distancia en la que se encuentra: {{item['distanciaKM']}}</p>
+	  		</ion-card-content>
+	  		<ion-grid>
+				<ion-row>
+					<ion-col>
+						<ion-item>
+							<div>Estatus del condutor:  {{item['status']}}</div>
+	  					</ion-item>
+				    </ion-col>
+				    <ion-col></ion-col>
+				    <ion-col>
+				      <button ion-button class="color-primary" (click) = "confirmarViaje(item)">Tomar viaje</button>
+				    </ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
 	</ion-card>
 </ion-content>
 <ion-footer>

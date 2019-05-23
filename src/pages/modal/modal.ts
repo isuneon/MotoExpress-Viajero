@@ -75,7 +75,7 @@ export class ModalPage {
   	 	this.directionsDisplay.setOptions({ suppressMarkers: true });
 
 		google.maps.event.addListenerOnce(this.map, 'idle', () => {
-			let marker = new google.maps.Marker({
+		new google.maps.Marker({
 		  		position: this.myLatLng,
 			  	map: this.map,
 			  	title: 'Hello World!'
@@ -103,20 +103,10 @@ export class ModalPage {
 		 	map: this.map 
 		});
 
-		// this.waypoints.forEach(waypoint => {
-		// 	var point = new google.maps.LatLng(waypoint.location.lat, waypoint.location.lng);
-		// 	this.bounds.extend(point);
-		// });
-
 		this.map.fitBounds(this.bounds);
-
-
 		this.directionsService.route({
 			origin: new google.maps.LatLng(this.myLatLng),
-			// origin: this.start,
 			destination: new google.maps.LatLng(destino.lat, destino.lng),
-			// destination: this.end,
-			// waypoints: this.waypoints,
 			optimizeWaypoints: true,
 			travelMode: google.maps.TravelMode.DRIVING,
 			avoidTolls: true
@@ -128,6 +118,4 @@ export class ModalPage {
 		    }
 		});  
 	}
-
-
 }

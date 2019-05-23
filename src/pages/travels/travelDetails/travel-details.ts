@@ -17,9 +17,9 @@ export class TravelDetailsPage {
 	dataViaje:any;
     directionsService: any = null;
     directionsDisplay: any = null;
-    kmAbarcar: number;
-    loader;
     anio: string;
+    loader;
+
 
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams, 
@@ -28,23 +28,20 @@ export class TravelDetailsPage {
                 public _ratesProvider: RatesProvider,
                 public _travelsProvider: TravelsProvider) {
         
-        // this.anio = new Date().getFullYear();
         this.anio = moment().format('YYYY') 
         this.obtenerTarifa()
-
-        this.obtenerKm()
-
         this.directionsService = new google.maps.DirectionsService();
         this.directionsDisplay = new google.maps.DirectionsRenderer();
         this.dataViaje = navParams.get("data");
     }
+
 
     ionViewDidLoad() {
 		
 	}
 
 
-	showPrompt() {
+	confirmarViaje() {
         const confirm = this.alertCtrl.create({
             title: 'Confirmación del viaje',
             message: '¿Está seguro de querer este viaje?',
@@ -84,7 +81,7 @@ export class TravelDetailsPage {
     obtenerKm(){
         this._ratesProvider.obtenerKm().subscribe(res => {
             if(res['status'] == "200"){
-                this.kmAbarcar = res['data']
+                this.dataViaje['kmAbarcar'] = res['data']
             }else{
                 this._principalProvider.showAlert('Error', 'Ocurrió un error al intentar obtener la tarifa del viaje');
             }
@@ -125,6 +122,7 @@ export class TravelDetailsPage {
                 if(status === google.maps.DirectionsStatus.OK) {
                     dataConductores[x]['distanciaKM'] = response['routes'][0]['legs'][0]['distance']['text']
                     dataConductores[x]['kmValue'] = response['routes'][0]['legs'][0]['distance']['value']
+                    dataConductores[x]['kmValue'] > this.dataViaje['kmAbarcar'] ? dataConductores[x]['mostrar'] = false : dataConductores[x]['mostrar'] = true
                 }else{
                   alert('Could not display directions due to: ' + status);
                 }
@@ -133,6 +131,6 @@ export class TravelDetailsPage {
             dataConductores[x]['promedio'] = dataConductores[x]['promedio'] ? dataConductores[x]['promedio'] : 0
             dataConductores[x]['promedio'] = dataConductores[x]['promedio'] > 5.00 ? 5.00 : dataConductores[x]['promedio']
         }
-        this.navCtrl.push(DriversDetailsPage, {data: dataConductores, dataViaje: this.dataViaje, kmAbarcar: this.kmAbarcar})
+        this.navCtrl.push(DriversDetailsPage, {data: dataConductores, dataViaje: this.dataViaje})
     }
 }
