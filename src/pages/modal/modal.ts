@@ -75,7 +75,7 @@ export class ModalPage {
   	 	this.directionsDisplay.setOptions({ suppressMarkers: true });
 
 		google.maps.event.addListenerOnce(this.map, 'idle', () => {
-		new google.maps.Marker({
+			new google.maps.Marker({
 		  		position: this.myLatLng,
 			  	map: this.map,
 			  	title: 'Hello World!'

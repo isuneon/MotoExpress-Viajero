@@ -10,12 +10,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
-
     rootPage: any;
+
 
     constructor(public platform: Platform, 
                 public statusBar: StatusBar,
@@ -33,11 +33,12 @@ export class MyApp {
 
     }
 
+
     initializeApp() {
         this.platform.ready().then(() => {
-            this.hideSplashScreen();
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
+            this.hideSplashScreen();
             this.statusBar.styleDefault();
             // this.splashScreen.hide();
         });

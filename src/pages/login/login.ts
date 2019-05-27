@@ -23,6 +23,7 @@ export class LoginPage {
     anio: string;
     pais:string;
     
+    
     constructor(public navCtrl: NavController, 
                 public navParams: NavParams,
                 public loadingCtrl: LoadingController,

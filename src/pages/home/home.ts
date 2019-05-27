@@ -6,6 +6,7 @@ import { PrincipalProvider } from '../../providers/principal';
 import * as moment from 'moment';
 declare var google;
 
+
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html'
